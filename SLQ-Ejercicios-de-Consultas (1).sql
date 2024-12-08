@@ -11,9 +11,12 @@ select Titulo from Peliculas P, [Peliculas.Plataformas]
 where [Peliculas.Plataformas].IdPlataforma = 3 and [Peliculas.Plataformas].IdPelicula = P.Id
 
 --4 Obtener la Cantidad de Películas con Clasificación R(4). (Considerar usar el Comando LIKE)
-select * from [Peliculas.Clasificaciones] PC where PC.IdClasificacion = 4
-select count(PC.IdClasificacion) as Peliculas from [Peliculas.Clasificaciones] PC where PC.IdClasificacion = 4
+select count(PC.IdClasificacion) as 'Cantidad de Peliculas' from [Peliculas.Clasificaciones] PC where PC.IdClasificacion = 4
+select count(PC.IdClasificacion) as 'Cantidad de Peliculas' from [Peliculas.Clasificaciones] PC where IdClasificacion like '%4'
+select * from Clasificaciones 
 
+select count(PC.IdClasificacion) as 'Cantidad de Peliculas', C.Descripcion from [Peliculas.Clasificaciones] PC, Clasificaciones C 
+where PC.IdClasificacion like '%4' and PC.IdClasificacion = C.Id group by C.Descripcion
 
 --5 Obtener la Película que mayor duración tiene.
 Select Titulo, MinutosDuracion from Peliculas where MinutosDuracion = (Select max(MinutosDuracion) from Peliculas)
